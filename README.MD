@@ -79,7 +79,7 @@ needed. For example:
 ```go
 func FakeAuthStreamingInterceptor(srv interface{}, stream grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
    newStream := grpc_middleware.WrapServerStream(stream)
-   newStream.WrappedContext = context.WithValue(ctx, "user_id", "john@example.com")
+   newStream.WrappedContext = context.WithValue(stream.Context(), "user_id", "john@example.com")
    return handler(srv, stream)
 }
 ```
